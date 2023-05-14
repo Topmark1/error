@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+  input{margin-right:10px}
+  div{margin-top:20px}
+</style>
+</head>
+<body>
+    <div>
+<input type="text" id="input1" placeholder='market name i.e GPDUSD'>
+<input type="text" id="input2" placeholder='lineVal i.e 1.21'>
+<input type="text" id="input3" placeholder='cVal i.e 0.02'>
+<input type="text" id="input4" placeholder='day dayDifference i.e 4'>
+<button>load me</button>
+    </div>
+<div id = 'man' style="font-size:30px;display:flex;flex-wrap:wrap;">
+ 
+</div>
+   
+</body>
+<script>
+
+let button = document.querySelector('button')
+
+async function madMagic(name,lineVal,cVal,dayDifference){
+let time = new Date(); 
+let hour = time.getHours()
+let minutes = time.getMinutes()
+let year = time.getFullYear()
+let day = time.getDate()+1
+let dayDiff = dayDifference
+let startDay = day<(dayDiff+1)?(28-((dayDiff+1)-day)):day-dayDiff;
+let month = time.getMonth()+1
+let startMonth = day<(dayDiff+1)?month-1:month;
+let Weekday = time.getDay()+1
+
+const url = `https://mt5.mtapi.be/PriceHistory?id=demo-token-mt5&symbol=${name}&from=${year}-${startMonth<10?("0"+startMonth):startMonth}-${startDay<10?("0"+startDay):startDay}T${hour<10?("0"+hour):hour}%3A${minutes<10?("0"+minutes):minutes}%3A00&to=${year}-${month<10?("0"+month):month}-${day<10?("0"+day):day}T${hour<10?("0"+hour):hour}%3A${minutes<10?("0"+minutes):minutes}%3A00&timeFrame=5`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+let specData = []
+for(let i= 0; i < data.length; i++){
+specData.push(data[i].openPrice)
+}
+ let list = specData
+ console.log("List "+list.length)
+
+ let c_val = cVal; //aternate 2
+//!!!!!alternate bewteen 1 and 2 to confirm high and low would not affect c_val
+let line_val = lineVal  //any value on any line 
+let start = list[0]
+let annual = [];
+
+c_val = (Math.round(c_val*100000))*1
+line_val=(Math.round(line_val*100000))*1
+start = (Math.round(list[0]*100000))*1
+
+let w = line_val - start
+let y  = w % c_val
+let imaginaryStart = start + ((y>=0?y:y+c_val)) 
+
+for(let k=1;k<list.length;k++) {
+    //console.log(imaginaryStart)
+   if((list[k]*100000)>=(imaginaryStart+c_val)){
+        //sharp long move code, advisible should be avoided!!!!!
+        up = Math.floor(((list[k]*100000) - imaginaryStart)/c_val)*1
+        for(let j=0;j<up;j++){annual.push("A")}
+        imaginaryStart = imaginaryStart+(c_val*up);
+        //console.log(list[k-1]+" to "+list[k])
+   }
+   if((list[k]*100000)<=(imaginaryStart-c_val)){
+    //sharp long move code, advisible should be avoided!!!!!
+    up = Math.floor(( imaginaryStart -(list[k]*100000) )/c_val)*1
+        for(j=0;j<up;j++){annual.push("B")}
+        imaginaryStart = imaginaryStart-(c_val*up);
+       // console.log(list[k-1]+" to "+list[k])
+    }
+}  
+let sign = annual.join("")
+let signRep
+let win = 0
+let lose = 0
+let state = {pos:"",val:0}
+
+let command = "No"
+sign[0] == "A" ? state.pos = "OA" :  state.pos = "OB";
+
+for(let i = 1; i <sign.length; i ++){
+    sign[i] == "A"?signRep = +1:signRep = -1;
+    state.val = state.val + signRep
+
+////////////////////Up ward
+    if(state.pos == "OA" && state.val == +1 ){
+        state.val = 0
+    }
+    else if(state.pos == "OA" && state.val == -3){
+        state.pos = "SB1"
+        command = "BS"
+    }
+    else if(state.pos == "SB1" && state.val == -4){
+        state.pos = "OB"
+        state.val = 0
+        command = "No"
+    }
+    else if(state.pos == "SB1" && state.val == 0){
+        state.pos = "SB2"
+        command = "B"
+    }
+    else if(state.pos == "SB2" && state.val == +1){
+        state.pos = "OA"
+        state.val = 0
+        win ++
+        command = "No"
+    }
+    else if(state.pos == "SB2" && state.val == -1){
+        state.val=-10 // to ensure no confusion after a defeat as winning and losing condition is still possible
+        lose ++
+        command = "No"
+    }
+    else if(state.pos == "SB2" && state.val == -8){
+        state.pos = "OA"
+        state.val = 0
+    }
+    else if(state.pos == "SB2" && state.val == -13){
+         state.pos = "OB"
+        state.val = 0
+    }
+
+////////////////////Down ward
+    else if(state.pos == "OB" && state.val == -1 ){
+        state.val = 0
+    }
+    else if(state.pos == "OB" && state.val == +3){
+        state.pos = "SA1"
+        command = "SS"
+    }
+    else if(state.pos == "SA1" && state.val == +4){
+        state.pos = "OA"
+        state.val = 0
+        command = "No"
+    }
+    else if(state.pos == "SA1" && state.val == 0){
+        state.pos = "SA2"
+        command = "S"
+    }
+    else if(state.pos == "SA2" && state.val == -1){
+        state.pos = "OB"
+        state.val = 0
+        win ++
+        command = "No"
+    }
+    else if(state.pos == "SA2" && state.val == +1){
+        state.val=10 // to ensure no confusion after a defeat as winning and losing condition is still possible
+        lose ++
+        command = "No"
+    }
+    else if(state.pos == "SA2" && state.val == 8){
+        state.pos = "OB"
+        state.val = 0
+    }
+    else if(state.pos == "SA2" && state.val == 13){
+         state.pos = "OA"
+        state.val = 0
+    }
+}
+
+    let ims = imaginaryStart/100000
+    let sV = state.val
+    let cv = c_val/100000
+    let action = {order:command,act:"Don't Trade Yet",SL:0,TP:0,actName:name,currentPos:(imaginaryStart/100000)}
+
+    if(command == "BS"){
+        let im = ims+((-1*sV) * cv)
+        action.act = `Buy Stop at ${im}`
+        action.SL = im - cv
+        action.TP = im + cv
+    }
+    else if(command == "B"){
+        let im = ims
+        action.act = `Buy at ${im}`
+        action.SL = im - cv
+        action.TP = im + cv
+    }
+    else if(command == "SS"){
+        let im = ims-((sV) * cv)
+        action.act = `Sell Stop at ${im}`
+        action.SL = im + cv
+        action.TP = im - cv
+    }
+    else if(command == "S"){
+        let im = ims
+        action.act = `Sell at ${im}`
+        action.SL = im + cv
+        action.TP = im - cv
+    }
+    //{"order": "No","act": "Don't Trade Yet","SL": 0,"TP": 0,"actName": "GBPUSD","currentPos": 1.25
+    let col = ""
+if (action.order == "B" || action.order == "BS"){
+    let col = "color:green"
+}
+if (action.order == "S" || action.order == "SS"){
+    let col = "color:red"
+}
+    let one = `<div class="" id="" style='display:block;text-align:center;padding:10px'>
+        <div style="margin-top:10px;color:black;font-weight:800">${action.actName}</div>
+        <div style="margin-top:10px;color:black;font-weight:800"><span style=${col}>${action.act}</span></div>
+        <div style="margin-top:10px;color:black;font-weight:800">${action.TP}</div>
+        <div style="margin-top:10px;color:black;font-weight:800">${action.SL}</div>
+        </div>`
+ document.getElementById('man').insertAdjacentHTML('beforeend',one);
+ 
+    console.log(action)
+    return action
+}
+
+button.addEventListener('click',()=>{  
+let input1 = document.querySelector('#input1').value
+let input2 = document.querySelector('#input2').value*1
+let input3 = document.querySelector('#input3').value*1
+let input4 = document.querySelector('#input4').value*1
+    madMagic(input1,input2,input3,input4)
+ })
+
+madMagic("GBPUSD",1.2100,0.02,4)
+madMagic("GBPUSD",1.2150,0.02,4)
+madMagic("GBPUSD",1.2050,0.02,4)
+madMagic("GBPUSD",1.2200,0.02,4)
+
+</script>
+</html>
