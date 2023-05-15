@@ -29,10 +29,11 @@ let button = document.querySelector('button')
 
 async function madMagic(name,lineVal,cVal,dayDifference){
 let time = new Date(); 
-let hour = time.getHours()
+let hour = time.getHours()+3
+hour>20? hour = 04:"";
 let minutes = time.getMinutes()
 let year = time.getFullYear()
-let day = hour>19?time.getDate()+2:time.getDate()+1;//cant trade on last day of the month from 19:00 edit the +2
+let day = hour>20?time.getDate()+2:time.getDate()+1;//cant trade on last day of the month from 19:00 edit the +2
 let dayDiff = dayDifference
 let startDay = day<(dayDiff+1)?(28-((dayDiff+1)-day)):day-dayDiff;
 let month = time.getMonth()+1
@@ -213,7 +214,7 @@ if (action.order == "S" || action.order == "SS"){
         <div style="margin-top:10px;color:black;font-weight:800">${action.SL}</div>
         </div>`
  document.getElementById('man').insertAdjacentHTML('beforeend',one);
- 
+        
     console.log(action)
     return action
 }
