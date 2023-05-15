@@ -41,7 +41,7 @@ let startMonth = day<(dayDiff+1)?month-1:month;
 let Weekday = time.getDay()+1
 
 const url = `https://mt5.mtapi.be/PriceHistory?id=demo-token-mt5&symbol=${name}&from=${year}-${startMonth<10?("0"+startMonth):startMonth}-${startDay<10?("0"+startDay):startDay}T${hour<10?("0"+hour):hour}%3A${minutes<10?("0"+minutes):minutes}%3A00&to=${year}-${month<10?("0"+month):month}-${day<10?("0"+day):day}T${hour<10?("0"+hour):hour}%3A${minutes<10?("0"+minutes):minutes}%3A00&timeFrame=5`;
-
+//console.log(url)
       const response = await fetch(url);
       const data = await response.json();
 let specData = []
@@ -63,7 +63,7 @@ start = (Math.round(list[0]*100000))*1
 
 let w = line_val - start
 let y  = w % c_val
-let imaginaryStart = start + ((y>=0?y:y+c_val)) 
+let imaginaryStart = start + ((y>=0?y:y+c_val)) //seems to start from upper limit
 
 for(let k=1;k<list.length;k++) {
     //console.log(imaginaryStart)
@@ -83,6 +83,7 @@ for(let k=1;k<list.length;k++) {
     }
 }  
 let sign = annual.join("")
+//console.log(sign)
 let signRep
 let win = 0
 let lose = 0
@@ -228,25 +229,25 @@ let input4 = document.querySelector('#input4').value*1
     madMagic(input1,input2,input3,input4)
  })
 
-madMagic("GBPUSD",1.20100,0.002,4)
-madMagic("XAUUSD",2010,2,4)
-madMagic("GBPJPY",170,0.2,4)
-madMagic("USDCAD",1.300,0.002,4)
+ madMagic("GBPUSD",1.20100,0.002,6)
+madMagic("XAUUSD",2010,2,6)
+madMagic("GBPJPY",170,0.2,6)
+madMagic("USDCAD",1.300,0.002,6) 
 
-madMagic("GBPUSD",1.20150,0.002,4)
-madMagic("XAUUSD",2010.5,2,4)
-madMagic("USDCAD",1.3005,0.002,4)
-madMagic("GBPJPY",170.1,0.2,4)
+madMagic("GBPUSD",1.20150,0.002,6)
+madMagic("XAUUSD",2010.5,2,6)
+madMagic("USDCAD",1.3005,0.002,6)
+madMagic("GBPJPY",170.1,0.2,6)
 
-madMagic("GBPUSD",1.20050,0.002,4)
-madMagic("XAUUSD",2011,2,4)
-madMagic("USDCAD",1.301,0.002,4)
-madMagic("GBPJPY",170.05,0.2,4)
+madMagic("GBPUSD",1.20050,0.002,6)
+madMagic("XAUUSD",2011,2,6) 
+madMagic("USDCAD",1.301,0.002,6)
+madMagic("GBPJPY",170.05,0.2,6)
 
-madMagic("GBPUSD",1.20200,0.002,4)
-madMagic("XAUUSD",2011.5,2,4)
-madMagic("USDCAD",1.3015,0.002,4)
-madMagic("GBPJPY",170.15,0.2,4)
+madMagic("GBPUSD",1.20200,0.002,6)
+madMagic("XAUUSD",2011.5,2,6)
+madMagic("USDCAD",1.3015,0.002,6)
+madMagic("GBPJPY",170.15,0.2,6) 
 
 </script>
 </html>
