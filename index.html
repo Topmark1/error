@@ -201,11 +201,12 @@ for(let i = 1; i <sign.length; i ++){
     }
     //{"order": "No","act": "Don't Trade Yet","SL": 0,"TP": 0,"actName": "GBPUSD","currentPos": 1.25
     let col = ""
-if (action.order == "B" || action.order == "BS"){
-    let col = "color:green"
+    //command="SS"
+if (command == "B" || command == "BS"){
+     col = "color:green"
 }
-if (action.order == "S" || action.order == "SS"){
-    let col = "color:red"
+if (command == "S" || command == "SS"){
+     col = "color:red"
 }
     let one = `<div class="" id="" style='display:block;text-align:center;padding:10px'>
         <div style="margin-top:3px;color:black;font-weight:800">${action.actName}</div>
@@ -229,16 +230,23 @@ let input4 = document.querySelector('#input4').value*1
 
 madMagic("GBPUSD",1.20100,0.002,4)
 madMagic("XAUUSD",2010,2,4)
-madMagic("XAUAUD",3010,2,4)
+madMagic("GBPJPY",170,0.2,4)
+madMagic("USDCAD",1.300,0.002,4)
+
 madMagic("GBPUSD",1.20150,0.002,4)
 madMagic("XAUUSD",2010.5,2,4)
-madMagic("XAUAUD",3010.5,2,4)
+madMagic("USDCAD",1.3005,0.002,4)
+madMagic("GBPJPY",170.1,0.2,4)
+
 madMagic("GBPUSD",1.20050,0.002,4)
 madMagic("XAUUSD",2011,2,4)
-madMagic("XAUAUD",3011,2,4)
+madMagic("USDCAD",1.301,0.002,4)
+madMagic("GBPJPY",170.05,0.2,4)
+
 madMagic("GBPUSD",1.20200,0.002,4)
 madMagic("XAUUSD",2011.5,2,4)
-madMagic("XAUAUD",3011.5,2,4)
+madMagic("USDCAD",1.3015,0.002,4)
+madMagic("GBPJPY",170.15,0.2,4)
 
 </script>
 </html>
