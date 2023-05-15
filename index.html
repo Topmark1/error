@@ -32,7 +32,7 @@ let time = new Date();
 let hour = time.getHours()
 let minutes = time.getMinutes()
 let year = time.getFullYear()
-let day = time.getDate()+1
+let day = hour>19?time.getDate()+2:time.getDate()+1;//cant trade on last day of the month from 19:00 edit the +2
 let dayDiff = dayDifference
 let startDay = day<(dayDiff+1)?(28-((dayDiff+1)-day)):day-dayDiff;
 let month = time.getMonth()+1
@@ -226,10 +226,10 @@ let input4 = document.querySelector('#input4').value*1
     madMagic(input1,input2,input3,input4)
  })
 
-madMagic("GBPUSD",1.2100,0.02,4)
-madMagic("GBPUSD",1.2150,0.02,4)
-madMagic("GBPUSD",1.2050,0.02,4)
-madMagic("GBPUSD",1.2200,0.02,4)
+madMagic("GBPUSD",1.2100,0.02,5)
+madMagic("GBPUSD",1.2150,0.02,5)
+madMagic("GBPUSD",1.2050,0.02,5)
+madMagic("GBPUSD",1.2200,0.02,5)
 
 </script>
 </html>
