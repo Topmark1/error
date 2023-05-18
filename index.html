@@ -18,7 +18,7 @@
 <input type="text" id="input4" placeholder='day dayDifference i.e 4'>
 <button>load me</button>
     </div>
-<div id = 'man' style="font-size:20px;display:flex;flex-wrap:wrap;">
+<div id = 'man' style="font-size:17px;display:flex;flex-wrap:wrap;">
  
 </div>
    
@@ -171,34 +171,34 @@ for(let i = 1; i <sign.length; i ++){
     }
 }
 
-    let ims = imaginaryStart/100000
+    let ims = imaginaryStart///100000
     let sV = state.val
-    let cv = c_val/100000
+    let cv = c_val///100000
     let action = {order:command,act:"Don't Trade Yet",SL:0,TP:0,actName:name,currentPos:(imaginaryStart/100000)}
 
     if(command == "BS"){
         let im = ims+((-1*sV) * cv)
-        action.act = `Buy Stop at ${im}`
-        action.SL = im - cv
-        action.TP = im + cv
+        action.act = `Buy Stop at ${im/100000}`
+        action.SL = (im - cv)/100000
+        action.TP = (im + cv)/100000
     }
     else if(command == "B"){
         let im = ims
-        action.act = `Buy at ${im}`
-        action.SL = im - cv
-        action.TP = im + cv
+        action.act = `Buy at ${im/100000}`
+        action.SL = (im - cv)/100000
+        action.TP = (im + cv)/100000
     }
     else if(command == "SS"){
         let im = ims-((sV) * cv)
-        action.act = `Sell Stop at ${im}`
-        action.SL = im + cv
-        action.TP = im - cv
+        action.act = `Sell Stop at ${im/100000}`
+        action.SL = (im + cv)/100000
+        action.TP = (im - cv)/100000
     }
     else if(command == "S"){
         let im = ims
-        action.act = `Sell at ${im}`
-        action.SL = im + cv
-        action.TP = im - cv
+        action.act = `Sell at ${im/100000}`
+        action.SL = (im + cv)/100000
+        action.TP = (im - cv)/100000
     }
     //{"order": "No","act": "Don't Trade Yet","SL": 0,"TP": 0,"actName": "GBPUSD","currentPos": 1.25
     let col = ""
@@ -209,7 +209,7 @@ if (command == "B" || command == "BS"){
 if (command == "S" || command == "SS"){
      col = "color:red"
 }
-    let one = `<div class="" id="" style='display:block;text-align:center;padding:10px'>
+    let one = `<div class="" id="" style='display:block;text-align:center;padding:5px'>
         <div style="margin-top:3px;color:black;font-weight:800">${action.actName}</div>
         <div style="margin-top:3px;color:black;font-weight:800"><span style=${col}>${action.act}</span></div>
         <div style="margin-top:3px;color:black;font-weight:800">${action.TP}</div>
@@ -233,21 +233,25 @@ let input4 = document.querySelector('#input4').value*1
 madMagic("XAUUSD",2010,2,6)
 madMagic("GBPJPY",170,0.2,6)
 madMagic("USDCAD",1.300,0.002,6) 
+madMagic("AUDUSD",0.61000,0.002,6) 
 
 madMagic("GBPUSD",1.20150,0.002,6)
 madMagic("XAUUSD",2010.5,2,6)
 madMagic("USDCAD",1.3005,0.002,6)
 madMagic("GBPJPY",170.1,0.2,6)
+madMagic("AUDUSD",0.61050,0.002,6) 
 
 madMagic("GBPUSD",1.20050,0.002,6)
 madMagic("XAUUSD",2011,2,6) 
 madMagic("USDCAD",1.301,0.002,6)
 madMagic("GBPJPY",170.05,0.2,6)
+madMagic("AUDUSD",0.61100,0.002,6) 
 
 madMagic("GBPUSD",1.20200,0.002,6)
 madMagic("XAUUSD",2011.5,2,6)
 madMagic("USDCAD",1.3015,0.002,6)
 madMagic("GBPJPY",170.15,0.2,6) 
+madMagic("AUDUSD",0.61150,0.002,6) 
 
 </script>
 </html>
