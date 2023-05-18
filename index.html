@@ -21,6 +21,9 @@
 <div id = 'man' style="font-size:17px;display:flex;flex-wrap:wrap;">
  
 </div>
+<div id = 'unman' style="font-size:17px;display:flex;flex-wrap:wrap;">
+ 
+</div>
    
 </body>
 <script>
@@ -209,13 +212,17 @@ if (command == "B" || command == "BS"){
 if (command == "S" || command == "SS"){
      col = "color:red"
 }
-    let one = `<div class="" id="" style='display:block;text-align:center;padding:5px'>
+    let one = `<div class="" id="" style='display:block;text-align:center;padding:2px'>
         <div style="margin-top:3px;color:black;font-weight:800">${action.actName}</div>
         <div style="margin-top:3px;color:black;font-weight:800"><span style=${col}>${action.act}</span></div>
         <div style="margin-top:3px;color:black;font-weight:800">${action.TP}</div>
         <div style="margin-top:3px;color:black;font-weight:800">${action.SL}</div>
         </div>`
- document.getElementById('man').insertAdjacentHTML('beforeend',one);
+        if(command == "B" ||command == "BS"||command == "S"||command == "SS"){
+ document.getElementById('man').insertAdjacentHTML('beforeend',one);}
+ else{
+    document.getElementById('unman').insertAdjacentHTML('beforeend',one);
+ }
         
     console.log(action)
     return action
