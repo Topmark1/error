@@ -36,15 +36,17 @@ let hour = time.getHours()+3
 hour>20? hour = 04:"";
 let minutes = time.getMinutes()
 let year = time.getFullYear()
-let day = hour>20?time.getDate()+2:time.getDate()+1;//cant trade on last day of the month from 19:00 edit the +2
+
+let day = (time.getHours()+3)>20?time.getDate()+1:time.getDate();//cant trade on last day of the month from 19:00 edit the +1 to +2
 let dayDiff = dayDifference
 let startDay = day<(dayDiff+1)?(28-((dayDiff+1)-day)):day-dayDiff;
-let month = time.getMonth()+1
+let month = time.getMonth()+1 //cant trade on last day of the month from 19:00 edit the +1 to +2
 let startMonth = day<(dayDiff+1)?month-1:month;
 let Weekday = time.getDay()+1
 
+
 const url = `https://mt5.mtapi.be/PriceHistory?id=demo-token-mt5&symbol=${name}&from=${year}-${startMonth<10?("0"+startMonth):startMonth}-${startDay<10?("0"+startDay):startDay}T${hour<10?("0"+hour):hour}%3A${minutes<10?("0"+minutes):minutes}%3A00&to=${year}-${month<10?("0"+month):month}-${day<10?("0"+day):day}T${hour<10?("0"+hour):hour}%3A${minutes<10?("0"+minutes):minutes}%3A00&timeFrame=5`;
-//console.log(url)
+console.log(url)
       const response = await fetch(url);
       const data = await response.json();
 let specData = []
