@@ -2,7 +2,7 @@
     font-size: 30px;
 }
 @media (max-width: 700px) {
-    #man,#unman{
+    #man,#unman,#attendance{
         font-size: 16px;
     }
   }
