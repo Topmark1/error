@@ -12,12 +12,13 @@
 </style>
 </head>
 <body>
-    <div>
+    <div style="display:flex;flex-wrap: wrap;">
 <input type="text" id="input1" placeholder='market name i.e GPDUSD'>
 <input type="text" id="input2" placeholder='lineVal i.e 1.21'>
 <input type="text" id="input3" placeholder='cVal i.e 0.02'>
 <input type="text" id="input4" placeholder='day dayDifference i.e 4'>
 <button>load me</button>
+<h1 id="attendance" style="margin-left:20px">0</h1>
     </div>
 <div id = 'man' style="display:flex;flex-wrap:wrap;">
  
@@ -30,6 +31,7 @@
 <script>
 
 let button = document.querySelector('button')
+let attend = 0
 
 async function madMagic(name,lineVal,cVal,dayDifference){
 let time = new Date(); 
@@ -227,7 +229,8 @@ if (command == "S" || command == "SS"){
  else{
     document.getElementById('unman').insertAdjacentHTML('beforeend',one);
  }
-        
+        attend++
+        document.querySelector('#attendance').innerHTML = attend
     console.log(action)
     return action
 }
