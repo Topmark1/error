@@ -1,0 +1,9 @@
+#man,#unman{
+    font-size: 30px;
+}
+@media (max-width: 700px) {
+    #man,#unman{
+        font-size: 16px;
+    }
+  }
+  
