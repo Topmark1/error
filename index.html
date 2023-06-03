@@ -21,7 +21,13 @@
 <h1 id="attendance" style="margin-left:20px">0</h1>
     </div>
 <div id = 'man' style="display:flex;flex-wrap:wrap;">
- 
+    <div id = '6d' style="display:flex;flex-wrap:wrap;"></div>
+    <div id = '1' style="display:flex;flex-wrap:wrap;"></div>
+    <div id = '2' style="display:flex;flex-wrap:wrap;"></div>
+    <div id = '3' style="display:flex;flex-wrap:wrap;"></div>
+    <div id = '4' style="display:flex;flex-wrap:wrap;"></div>
+    <div id = '5' style="display:flex;flex-wrap:wrap;"></div>
+	 <div id = '6' style="display:flex;flex-wrap:wrap;"></div>	
 </div>
 <div id = 'unman' style="display:flex;flex-wrap:wrap;">
  
@@ -33,7 +39,7 @@
 let button = document.querySelector('button')
 let attend = 0
 
-async function madMagic(name,lineVal,cVal,dayDifference){
+async function madMagic(name,lineVal,cVal,dayDifference,spr=0){
 let time = new Date(); 
 let hour = time.getHours()+3
 hour>20? hour = 04:"";
@@ -179,7 +185,7 @@ for(let i = 1; i <sign.length; i ++){
         state.val = 0
     }
 }
-
+	 spr = spr * 100000
     let ims = imaginaryStart///100000
     let sV = state.val
     let cv = c_val///100000
@@ -187,27 +193,27 @@ for(let i = 1; i <sign.length; i ++){
 
     if(command == "BS"){
         let im = ims+((-1*sV) * cv)
-        action.act = `Buy Stop at ${im/100000}`
+        action.act = `Buy Stop at ${(im+spr)/100000}`
         action.SL = (im - cv)/100000
         action.TP = (im + cv)/100000
     }
     else if(command == "B"){
         let im = ims
-        action.act = `Buy at ${im/100000}`
+        action.act = `Buy at ${(im+spr)/100000}`
         action.SL = (im - cv)/100000
         action.TP = (im + cv)/100000
     }
     else if(command == "SS"){
         let im = ims-((sV) * cv)
         action.act = `Sell Stop at ${im/100000}`
-        action.SL = (im + cv)/100000
-        action.TP = (im - cv)/100000
+        action.SL = (im + cv +spr)/100000
+        action.TP = (im - cv +spr)/100000
     }
     else if(command == "S"){
         let im = ims
         action.act = `Sell at ${im/100000}`
-        action.SL = (im + cv)/100000
-        action.TP = (im - cv)/100000
+        action.SL = (im + cv +spr)/100000
+        action.TP = (im - cv +spr)/100000
     }
     //{"order": "No","act": "Don't Trade Yet","SL": 0,"TP": 0,"actName": "GBPUSD","currentPos": 1.25
     let col = ""
@@ -221,11 +227,19 @@ if (command == "S" || command == "SS"){
     let one = `<div class="" id="" style='display:block;text-align:center;padding:2px'>
         <div style="margin-top:3px;color:black;font-weight:800">${action.actName}</div>
         <div style="margin-top:3px;color:black;font-weight:800"><span style=${col}>${action.act}</span></div>
-        <div style="margin-top:3px;color:black;font-weight:800">${action.TP}</div>
-        <div style="margin-top:3px;color:black;font-weight:800">${action.SL}</div>
+<div style="margin-top:3px;color:black;font-weight:800">SL - ${action.SL}</div>
+        <div style="margin-top:3px;color:black;font-weight:800">TP - ${action.TP}</div>
         </div>`
         if(command == "B" ||command == "BS"||command == "S"||command == "SS"){
- document.getElementById('man').insertAdjacentHTML('beforeend',one);}
+            //document.getElementById('man').insertAdjacentHTML('beforeend',one);
+            if(action.actName == "AUDUSD"){document.getElementById('1').insertAdjacentHTML('beforeend',one);}
+            if(action.actName == "GBPJPY"){document.getElementById('2').insertAdjacentHTML('beforeend',one);}
+            if(action.actName == "GBPUSD"){document.getElementById('3').insertAdjacentHTML('beforeend',one);}
+            if(action.actName == "USDCAD"){document.getElementById('4').insertAdjacentHTML('beforeend',one);}
+            if(action.actName == "USDJPY"){document.getElementById('5').insertAdjacentHTML('beforeend',one);}
+            if(action.actName == "XAUUSD"){document.getElementById('6d').insertAdjacentHTML('beforeend',one);}
+if(action.actName == "XAUUSD" && cVal == 5){document.getElementById('6').insertAdjacentHTML('beforeend',one);}
+        }
  else{
     document.getElementById('unman').insertAdjacentHTML('beforeend',one);
  }
@@ -272,6 +286,12 @@ madMagic("USDJPY",140,0.2,7)
 madMagic("USDJPY",140.1,0.2,7)
 madMagic("USDJPY",140.05,0.2,7)
 madMagic("USDJPY",140.15,0.2,7) 
+
+madMagic("XAUUSD",2010,5,14,0.3)
+madMagic("XAUUSD",2011,5,14,0.3)
+madMagic("XAUUSD",2012,5,14,0.3) 
+madMagic("XAUUSD",2013,5,14,0.3)
+madMagic("XAUUSD",2014,5,14,0.3)
 
 </script>
 </html>
