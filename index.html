@@ -21,6 +21,7 @@
 <h1 id="attendance" style="margin-left:20px">0</h1>
     </div>
 <div id = 'man' style="display:flex;flex-wrap:wrap;">
+    <div id = 'error' style="display:flex;flex-wrap:wrap;color:red"></div>
     <div id = '6d' style="display:flex;flex-wrap:wrap;"></div>
     <div id = '1' style="display:flex;flex-wrap:wrap;"></div>
     <div id = '2' style="display:flex;flex-wrap:wrap;"></div>
@@ -40,6 +41,7 @@ let button = document.querySelector('button')
 let attend = 0
 
 async function madMagic(name,lineVal,cVal,dayDifference,spr=0){
+    try {
 let time = new Date(); 
 let hour = time.getHours()+3
 hour>20? hour = 04:"";
@@ -57,8 +59,10 @@ let Weekday = time.getDay()+1
 
 const url = `https://mt5.mtapi.be/PriceHistory?id=demo-token-mt5&symbol=${name}&from=${year}-${startMonth<10?("0"+startMonth):startMonth}-${startDay<10?("0"+startDay):startDay}T${hour<10?("0"+hour):hour}%3A${minutes<10?("0"+minutes):minutes}%3A00&to=${year}-${month<10?("0"+month):month}-${day<10?("0"+day):day}T${hour<10?("0"+hour):hour}%3A${minutes<10?("0"+minutes):minutes}%3A00&timeFrame=5`;
 console.log(url)
+
       const response = await fetch(url);
       const data = await response.json();
+
 let specData = []
 for(let i= 0; i < data.length; i++){
 specData.push(data[i].openPrice)
@@ -243,11 +247,20 @@ if(action.actName == "XAUUSD" && cVal == 5){document.getElementById('6').insertA
  else{
     document.getElementById('unman').insertAdjacentHTML('beforeend',one);
  }
+if(list.length == 0){
+    document.getElementById('error').innerHTML = "Network Error, Reload!"
+}
+
         attend++
         document.querySelector('#attendance').innerHTML = attend
     console.log(action)
     return action
+} catch (error) {
+    document.getElementById('error').innerHTML = "Network Error, Reload!"
 }
+}
+
+
 
 button.addEventListener('click',()=>{  
 let input1 = document.querySelector('#input1').value
