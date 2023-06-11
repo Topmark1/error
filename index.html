@@ -22,7 +22,6 @@
     </div>
 <div id = 'man' style="display:flex;flex-wrap:wrap;">
     <div id = 'error' style="display:flex;flex-wrap:wrap;color:red"></div>
-    <div id = '6d' style="display:flex;flex-wrap:wrap;"></div>
     <div id = '1' style="display:flex;flex-wrap:wrap;"></div>
     <div id = '2' style="display:flex;flex-wrap:wrap;"></div>
     <div id = '3' style="display:flex;flex-wrap:wrap;"></div>
@@ -241,8 +240,7 @@ if (command == "S" || command == "SS"){
             if(action.actName == "GBPUSD"){document.getElementById('3').insertAdjacentHTML('beforeend',one);}
             if(action.actName == "USDCAD"){document.getElementById('4').insertAdjacentHTML('beforeend',one);}
             if(action.actName == "USDJPY"){document.getElementById('5').insertAdjacentHTML('beforeend',one);}
-            if(action.actName == "XAUUSD" && cVal == 2){document.getElementById('6d').insertAdjacentHTML('beforeend',one);}
-if(action.actName == "XAUUSD" && cVal == 5){document.getElementById('6').insertAdjacentHTML('beforeend',one);}
+            if(action.actName == "XAUUSD" ){document.getElementById('6').insertAdjacentHTML('beforeend',one);}
         }
  else{
     document.getElementById('unman').insertAdjacentHTML('beforeend',one);
@@ -270,35 +268,35 @@ let input4 = document.querySelector('#input4').value*1
     madMagic(input1,input2,input3,input4)
  })
 
- madMagic("GBPUSD",1.20100,0.002,7)
- madMagic("GBPUSD",1.20150,0.002,7)
- madMagic("GBPUSD",1.20050,0.002,7)
- madMagic("GBPUSD",1.20200,0.002,7)
+ madMagic("GBPUSD",1.20100,0.005,25,0.0001)
+ madMagic("GBPUSD",1.20200,0.005,25,0.0001)
+ madMagic("GBPUSD",1.20300,0.005,25,0.0001)
+ madMagic("GBPUSD",1.20400,0.005,25,0.0001)
+ madMagic("GBPUSD",1.20500,0.005,25,0.0001)
 
-madMagic("XAUUSD",2010,2,6)
-madMagic("XAUUSD",2010.5,2,6)
-madMagic("XAUUSD",2011,2,6) 
-madMagic("XAUUSD",2011.5,2,6)
+madMagic("GBPJPY",170.1,0.5,25,0.01)
+madMagic("GBPJPY",170.2,0.5,25,0.01)
+madMagic("GBPJPY",170.3,0.5,25,0.01)
+madMagic("GBPJPY",170.4,0.5,25,0.01) 
+madMagic("GBPJPY",170.5,0.5,25,0.01) 
 
-madMagic("GBPJPY",170,0.2,7)
-madMagic("GBPJPY",170.1,0.2,7)
-madMagic("GBPJPY",170.05,0.2,7)
-madMagic("GBPJPY",170.15,0.2,7) 
+madMagic("USDCAD",1.301,0.005,25,0.0001) 
+madMagic("USDCAD",1.302,0.005,25,0.0001)
+madMagic("USDCAD",1.303,0.005,25,0.0001)
+madMagic("USDCAD",1.304,0.005,25,0.0001)
+madMagic("USDCAD",1.305,0.005,25,0.0001)
 
-madMagic("USDCAD",1.300,0.002,7) 
-madMagic("USDCAD",1.3005,0.002,7)
-madMagic("USDCAD",1.301,0.002,7)
-madMagic("USDCAD",1.3015,0.002,7)
+madMagic("AUDUSD",0.61100,0.005,25,0.00008) 
+madMagic("AUDUSD",0.61200,0.005,25,0.00008) 
+madMagic("AUDUSD",0.61300,0.005,25,0.00008) 
+madMagic("AUDUSD",0.61400,0.005,25,0.00008) 
+madMagic("AUDUSD",0.61500,0.005,25,0.00008)
 
-madMagic("AUDUSD",0.61000,0.002,7) 
-madMagic("AUDUSD",0.61050,0.002,7) 
-madMagic("AUDUSD",0.61100,0.002,7) 
-madMagic("AUDUSD",0.61150,0.002,7) 
-
-madMagic("USDJPY",140,0.2,7)
-madMagic("USDJPY",140.1,0.2,7)
-madMagic("USDJPY",140.05,0.2,7)
-madMagic("USDJPY",140.15,0.2,7) 
+madMagic("USDJPY",140.1,0.5,25,0.01)
+madMagic("USDJPY",140.2,0.5,25,0.01)
+madMagic("USDJPY",140.3,0.5,25,0.01)
+madMagic("USDJPY",140.4,0.5,25,0.01) 
+madMagic("USDJPY",140.5,0.5,25,0.01) 
 
 madMagic("XAUUSD",2010,5,14,0.3)
 madMagic("XAUUSD",2011,5,14,0.3)
